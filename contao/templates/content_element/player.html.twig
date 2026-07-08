@@ -1,0 +1,17 @@
+{% extends "@Contao/content_element/player.html.twig" %}
+
+{% block media %}
+    {#
+        Inject our videoThumbnail poster as fallback when the editor has not
+        explicitly set a poster on the content element. We mutate the shared
+        HtmlAttributes object in-place so the parent block picks it up without
+        any duplication of its rendering logic.
+    #}
+    {% if figure.media.type == 'video' and figure.media.attributes.poster is not defined %}
+        {% set fallback_poster = video_thumbnail_poster(source_files) %}
+        {% if fallback_poster %}
+            {% set _ = figure.media.attributes.set('poster', fallback_poster) %}
+        {% endif %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}

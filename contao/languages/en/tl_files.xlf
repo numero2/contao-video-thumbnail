@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<xliff version="1.1">
+<file source-language="en">
+<body>
+    <!-- Field: videoThumbnail -->
+    <trans-unit id="tl_files.videoThumbnail.0">
+        <source>Video thumbnail</source>
+    </trans-unit>
+    <trans-unit id="tl_files.videoThumbnail.1">
+        <source>Navigate to the desired frame and click "Frame as thumbnail" to capture a poster image.</source>
+    </trans-unit>
+    <!-- Legend -->
+    <trans-unit id="tl_files.video_thumbnail_legend">
+        <source>Video thumbnail</source>
+    </trans-unit>
+</body>
+</file>
+</xliff>

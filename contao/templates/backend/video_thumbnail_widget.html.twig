@@ -1,0 +1,93 @@
+{# Backend widget for capturing a video frame as thumbnail (see VideoThumbnailWidget).
+   Custom player chrome on purpose: no audio, no fullscreen, no overflow menu. #}
+<div class="vt-widget" data-step="{{ frame_step }}" data-quality="{{ jpeg_quality }}"{% if thumbnail_time is not null %} data-time="{{ thumbnail_time }}"{% endif %}>
+
+{% if not is_public %}
+
+    {# Protected folder — the browser cannot load the video, so there is
+       nothing to capture. Show a warning instead of the player. #}
+    <p class="vt-warning">{{ 'MSC.videoThumbnail.protectedFolder'|trans({}, 'contao_default') }}</p>
+
+{% else %}
+
+    <div class="vt-player" tabindex="0" role="group" aria-label="{{ 'MSC.videoThumbnail.player'|trans({}, 'contao_default') }}" aria-describedby="{{ id }}_shortcuts">
+
+        <div class="vt-video-wrap">
+            <video muted playsinline preload="metadata">
+                <source src="{{ video_url }}">
+            </video>
+            {# Camera-flash overlay, triggered by JS on capture #}
+            <div class="vt-flash" aria-hidden="true"></div>
+            {# Revealed by JS only while the playhead sits on the thumbnail
+               position — purely visual, the sidebar carries the same info #}
+            <div class="vt-current-badge" aria-hidden="true" hidden>
+                <span class="vt-badge-label">{{ 'MSC.videoThumbnail.current'|trans({}, 'contao_default') }}</span>
+                <span class="vt-badge-time"></span>
+            </div>
+        </div>
+
+        <div class="vt-controls">
+            <button type="button" class="vt-play" aria-label="{{ 'MSC.videoThumbnail.playPause'|trans({}, 'contao_default') }}" aria-pressed="false">
+                <svg class="vt-icon-play" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg>
+                <svg class="vt-icon-pause" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z"/></svg>
+            </button>
+            <span class="vt-time"><span class="vt-time-current">0:00.000</span>&nbsp;/&nbsp;<span class="vt-time-duration">0:00.000</span></span>
+            <div class="vt-timeline">
+                <input type="range" class="vt-seek" min="0" max="0" step="0.001" value="0" aria-label="{{ 'MSC.videoThumbnail.timeline'|trans({}, 'contao_default') }}">
+                <button type="button" class="vt-marker" aria-label="{{ 'MSC.videoThumbnail.jumpToThumbnail'|trans({}, 'contao_default') }}" hidden></button>
+            </div>
+        </div>
+
+        <div class="vt-frame-controls">
+            <button type="button" class="vt-btn vt-prev-frame">{{ 'MSC.videoThumbnail.prevFrame'|trans({}, 'contao_default') }}</button>
+            <button type="button" class="vt-capture">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5.3 3.2 6.2 2h3.6l.9 1.2H13c.6 0 1 .4 1 1v8c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1v-8c0-.6.4-1 1-1h2.3zM8 11.2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+                {{ 'MSC.videoThumbnail.capture'|trans({}, 'contao_default') }}
+            </button>
+            <button type="button" class="vt-btn vt-next-frame">{{ 'MSC.videoThumbnail.nextFrame'|trans({}, 'contao_default') }}</button>
+        </div>
+
+        <div class="vt-shortcuts" id="{{ id }}_shortcuts">{{ 'MSC.videoThumbnail.shortcuts'|trans({}, 'contao_default') }}</div>
+
+    </div>
+
+    {# Hidden until a thumbnail exists (or one was just captured/removed —
+       after a change it stays visible to carry the unsaved hint) #}
+    <aside class="vt-sidebar"{% if not thumbnail_url %} hidden{% endif %}>
+
+        <span class="vt-sidebar-title">{{ 'MSC.videoThumbnail.current'|trans({}, 'contao_default') }}</span>
+
+        <div class="vt-preview"{% if not thumbnail_url %} hidden{% endif %}>
+            {% if thumbnail_url %}
+                <img src="{{ thumbnail_url }}" alt="{{ 'MSC.videoThumbnail.current'|trans({}, 'contao_default') }}">
+            {% endif %}
+        </div>
+
+        <div class="vt-timestamp"{% if thumbnail_time is null %} hidden{% endif %}>
+            <span>{{ 'MSC.videoThumbnail.timestamp'|trans({}, 'contao_default') }}</span>
+            <output class="vt-timestamp-value"></output>
+        </div>
+
+        <button type="button" class="vt-clear"{% if not thumbnail_url %} hidden{% endif %}>
+            <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M6 2h4l.6 1H14v1.5H2V3h3.4L6 2zM3.2 5.5h9.6L12 14.2c0 .5-.5.8-1 .8H5c-.5 0-1-.3-1-.8L3.2 5.5z"/></svg>
+            {{ 'MSC.videoThumbnail.clear'|trans({}, 'contao_default') }}
+        </button>
+
+        {# Unsaved-changes hint — revealed by JS after capture/clear so the user
+           knows the change only takes effect after submitting the form.
+           role="status" so screen readers announce it when it appears. #}
+        <p class="vt-unsaved" role="status" hidden>{{ 'MSC.videoThumbnail.unsaved'|trans({}, 'contao_default') }}</p>
+
+    </aside>
+
+    {# Hidden canvas used by JS for frame capture #}
+    <canvas class="vt-canvas" hidden></canvas>
+
+    {# Hidden inputs carrying the base64 data-URL (or delete token) and the
+       capture position in seconds on submit #}
+    <input type="hidden" class="vt-value" name="{{ name }}" id="{{ id }}" value="">
+    <input type="hidden" class="vt-value-time" name="{{ name }}_time" id="{{ id }}_time" value="">
+
+{% endif %}
+
+</div>

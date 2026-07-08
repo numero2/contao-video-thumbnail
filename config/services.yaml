@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    numero2\VideoThumbnailBundle\EventListener\DataContainer\FilesListener:
+        arguments:
+            $videoExtensions: '%video_thumbnail.video_extensions%'
+
+    numero2\VideoThumbnailBundle\Filesystem\ThumbnailStorage:
+        arguments:
+            $filesStorage: '@contao.filesystem.virtual.files'
+            $uploadPath: '%contao.upload_path%'
+            $posterSuffix: '%video_thumbnail.poster_suffix%'
+
+    numero2\VideoThumbnailBundle\Twig\VideoThumbnailExtension: ~
+
+    numero2\VideoThumbnailBundle\Twig\VideoThumbnailRuntime:
+        arguments:
+            $filesStorage: '@contao.filesystem.virtual.files'
+            $uploadPath: '%contao.upload_path%'

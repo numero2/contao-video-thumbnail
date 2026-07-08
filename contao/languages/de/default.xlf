@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<xliff version="1.1">
+<file source-language="en" target-language="de">
+<body>
+    <!-- VideoThumbnailWidget button/status texts -->
+    <trans-unit id="MSC.videoThumbnail.capture">
+        <source>Use this frame as thumbnail</source>
+        <target>Dieses Frame als Thumbnail verwenden</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.clear">
+        <source>Remove thumbnail</source>
+        <target>Thumbnail entfernen</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.prevFrame">
+        <source>‹ Previous frame</source>
+        <target>‹ Frame zurück</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.nextFrame">
+        <source>Next frame ›</source>
+        <target>Frame vor ›</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.current">
+        <source>Current thumbnail</source>
+        <target>Aktuelles Thumbnail</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.timestamp">
+        <source>Position</source>
+        <target>Zeitpunkt</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.shortcuts">
+        <source>Keyboard shortcuts: ← → frame by frame · Space play/pause</source>
+        <target>Tastaturkürzel: ← → Frameweise · Leertaste Play/Pause</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.unsaved">
+        <source>Save your changes to apply or remove the thumbnail.</source>
+        <target>Speichern Sie Ihre Änderungen, um das Thumbnail zu übernehmen oder zu entfernen.</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.player">
+        <source>Video player</source>
+        <target>Videoplayer</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.playPause">
+        <source>Play/pause</source>
+        <target>Wiedergabe/Pause</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.timeline">
+        <source>Timeline</source>
+        <target>Zeitleiste</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.jumpToThumbnail">
+        <source>Jump to thumbnail position</source>
+        <target>Zur Thumbnail-Position springen</target>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.protectedFolder">
+        <source>The video is located in a protected folder and cannot be played in the browser, so no thumbnail can be created. Make the folder public to use this feature.</source>
+        <target>Das Video befindet sich in einem geschützten Ordner und kann im Browser nicht abgespielt werden, daher kann kein Thumbnail erstellt werden. Machen Sie den Ordner öffentlich, um diese Funktion zu nutzen.</target>
+    </trans-unit>
+</body>
+</file>
+</xliff>

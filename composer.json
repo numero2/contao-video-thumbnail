@@ -1,0 +1,54 @@
+{
+    "name": "numero2/contao-video-thumbnail",
+    "type": "contao-bundle",
+    "description": "Allows editors to capture a video frame as thumbnail/poster directly in the Contao file manager.",
+    "keywords": ["contao", "video", "thumbnail", "poster"],
+    "license": "proprietary",
+    "authors": [{
+            "name": "numero2 - Agentur für digitales Marketing GbR",
+            "homepage": "https://www.numero2.de"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "contao/core-bundle": "^5.3",
+        "doctrine/dbal": "^3.6 || ^4.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/filesystem": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/yaml": "^6.4 || ^7.0",
+        "twig/twig": "^3.10"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "extra": {
+        "contao-manager-plugin": "numero2\\VideoThumbnailBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "numero2\\VideoThumbnailBundle\\": "src/"
+        },
+        "classmap": [
+            "contao/"
+        ],
+        "exclude-from-classmap": [
+            "contao/config/",
+            "contao/dca/",
+            "contao/languages/",
+            "contao/templates/"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": false,
+            "php-http/discovery": false,
+            "contao/manager-plugin": false
+        }
+    }
+}

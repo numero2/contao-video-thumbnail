@@ -1,0 +1,415 @@
+/* Video Thumbnail Widget — backend styles */
+
+.vt-widget {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 960px;
+    margin-block: 5px;
+}
+
+/* ---- Player card (follows the backend color scheme via Contao's vars;
+        only the video area itself stays black) ---- */
+
+.vt-player {
+    flex: 1 1 480px;
+    min-width: 320px;
+    background: var(--panel-bg, #f3f3f5);
+    border: 1px solid var(--content-border, #e0e0e2);
+    border-radius: 8px;
+    overflow: hidden;
+    outline: none;
+}
+
+.vt-player:focus-visible {
+    box-shadow: 0 0 0 2px var(--blue, #0092d6);
+}
+
+.vt-video-wrap {
+    position: relative;
+    background: #000;
+}
+
+.vt-video-wrap video {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* Camera-flash overlay shown when a frame is captured */
+.vt-flash {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.vt-flash.vt-flashing {
+    animation: vt-flash .45s ease-out;
+}
+
+@keyframes vt-flash {
+    0%   { opacity: .95; }
+    100% { opacity: 0; }
+}
+
+.vt-current-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 6px;
+    background: rgba(18, 20, 24, .85);
+    color: #fff;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.vt-current-badge[hidden] {
+    display: none;
+}
+
+.vt-badge-label {
+    font-weight: 600;
+}
+
+.vt-badge-label::before {
+    content: '✓ ';
+}
+
+.vt-badge-time {
+    color: #bbb;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---- Transport controls ---- */
+
+.vt-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: var(--panel-bg, #f3f3f5);
+}
+
+.vt-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text, #222);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.vt-play:hover {
+    background: var(--border, #eaeaec);
+}
+
+.vt-player .vt-icon-pause { display: none; }
+.vt-player.vt-playing .vt-icon-pause { display: block; }
+.vt-player.vt-playing .vt-icon-play { display: none; }
+
+.vt-time {
+    color: var(--text, #222);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.vt-timeline {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.vt-seek {
+    width: 100%;
+    height: 4px;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 2px;
+    background: linear-gradient(
+        to right,
+        var(--blue, #006494) var(--vt-progress, 0%),
+        var(--checkerbox-bg, #dddddf) var(--vt-progress, 0%)
+    );
+    cursor: pointer;
+}
+
+.vt-seek::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    background: var(--blue, #0092d6);
+}
+
+.vt-seek::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 50%;
+    background: var(--blue, #0092d6);
+}
+
+/* Position marker of the stored thumbnail — clickable, jumps to its position */
+.vt-marker {
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: 50%;
+    /* --black flips per color scheme (#000 light / #fff dark) */
+    background: var(--black, #000);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform .15s;
+    /* enlarge the click target beyond the 8px dot */
+    box-sizing: content-box;
+    padding: 4px;
+    background-clip: content-box;
+}
+
+.vt-marker:hover,
+.vt-marker:focus-visible {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.vt-marker[hidden] {
+    display: none;
+}
+
+/* ---- Frame / capture buttons ---- */
+
+.vt-frame-controls {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--panel-bg, #f3f3f5);
+    border-top: 1px solid var(--border, #eaeaec);
+}
+
+.vt-btn {
+    padding: 9px 14px;
+    border: 1px solid var(--form-border, #bbbbbd);
+    border-radius: 6px;
+    background: var(--form-bg, #fff);
+    color: var(--text, #222);
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color .15s, border-color .15s;
+}
+
+.vt-btn:hover {
+    background: var(--form-bg-hover, #f9f9fb);
+    border-color: var(--gray, #747476);
+}
+
+.vt-capture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 6px;
+    /* fixed instead of var(--blue): the 5.7 dark-scheme blue (#0092d6) only
+       reaches 3.4:1 against the white label — #0073a8 passes AA (5.2:1)
+       and works on both light and dark panel backgrounds */
+    background: #0073a8;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter .15s;
+}
+
+.vt-capture:hover {
+    filter: brightness(1.15);
+}
+
+.vt-shortcuts {
+    padding: 7px 12px;
+    background: var(--panel-bg, #f3f3f5);
+    border-top: 1px solid var(--border, #eaeaec);
+    color: var(--legend, #6a6a6c);
+    font-size: 11px;
+}
+
+.vt-shortcuts::before {
+    content: '⌨ ';
+}
+
+/* ---- Sidebar (adapts to the backend color scheme) ---- */
+
+.vt-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 0 1 240px;
+    min-width: 200px;
+}
+
+.vt-sidebar[hidden] {
+    display: none;
+}
+
+.vt-sidebar-title {
+    color: var(--legend, #6a6a6c);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.vt-preview[hidden] {
+    display: none;
+}
+
+.vt-preview img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border, #eaeaec);
+    border-radius: 6px;
+}
+
+.vt-timestamp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text, #222);
+    font-size: 13px;
+}
+
+.vt-timestamp[hidden] {
+    display: none;
+}
+
+.vt-timestamp-value {
+    padding: 5px 10px;
+    border: 1px solid var(--form-border, #bbbbbd);
+    border-radius: 6px;
+    background: var(--form-bg, #fff);
+    font-variant-numeric: tabular-nums;
+}
+
+.vt-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--red, #c7241f);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--red, #c7241f);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .15s;
+}
+
+.vt-clear:hover {
+    background: var(--error-bg, rgba(204, 51, 51, .15));
+}
+
+.vt-clear[hidden] {
+    display: none;
+}
+
+/* ---- Unsaved-changes hint / warning box ---- */
+
+.vt-unsaved,
+.vt-warning {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 8px 12px;
+    border: 1px solid var(--orange, #e67300);
+    border-radius: 6px;
+    background: var(--new-bg, rgba(224, 149, 21, .15));
+    color: var(--text, #222);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.vt-unsaved[hidden] {
+    display: none;
+}
+
+.vt-unsaved::before,
+.vt-warning::before {
+    content: '⚠';
+    flex-shrink: 0;
+}
+
+/* Fallback colors for contexts without Contao's --orange/--new-bg/--text
+   custom properties (both 5.3 and 5.7 define them via a data-color-scheme
+   attribute, so this media query only matters as a last-resort fallback). */
+@media (prefers-color-scheme: dark) {
+    .vt-unsaved,
+    .vt-warning {
+        border-color: var(--orange, #d66b00);
+        color: var(--text, #ddd);
+    }
+}
+
+/* ---- Accessibility ---- */
+
+/* Visible focus rings — --blue flips with the color scheme */
+.vt-play:focus-visible,
+.vt-btn:focus-visible,
+.vt-capture:focus-visible,
+.vt-marker:focus-visible,
+.vt-seek:focus-visible,
+.vt-clear:focus-visible {
+    outline: 2px solid var(--blue, #006494);
+    outline-offset: 2px;
+}
+
+/* Respect reduced-motion preferences: no camera flash, no marker zoom */
+@media (prefers-reduced-motion: reduce) {
+    .vt-flash.vt-flashing {
+        animation: none;
+    }
+
+    .vt-marker {
+        transition: none;
+    }
+
+    .vt-marker:hover,
+    .vt-marker:focus-visible {
+        transform: translate(-50%, -50%);
+    }
+
+    .vt-btn,
+    .vt-capture,
+    .vt-clear,
+    .vt-unsaved {
+        transition: none;
+    }
+}

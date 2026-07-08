@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.1">
+<file source-language="en">
+<body>
+    <!-- VideoThumbnailWidget button/status texts -->
+    <trans-unit id="MSC.videoThumbnail.capture">
+        <source>Use this frame as thumbnail</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.clear">
+        <source>Remove thumbnail</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.prevFrame">
+        <source>‹ Previous frame</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.nextFrame">
+        <source>Next frame ›</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.current">
+        <source>Current thumbnail</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.timestamp">
+        <source>Position</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.shortcuts">
+        <source>Keyboard shortcuts: ← → frame by frame · Space play/pause</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.unsaved">
+        <source>Save your changes to apply or remove the thumbnail.</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.player">
+        <source>Video player</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.playPause">
+        <source>Play/pause</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.timeline">
+        <source>Timeline</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.jumpToThumbnail">
+        <source>Jump to thumbnail position</source>
+    </trans-unit>
+    <trans-unit id="MSC.videoThumbnail.protectedFolder">
+        <source>The video is located in a protected folder and cannot be played in the browser, so no thumbnail can be created. Make the folder public to use this feature.</source>
+    </trans-unit>
+</body>
+</file>
+</xliff>
