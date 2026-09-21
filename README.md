@@ -1,5 +1,8 @@
 # Contao Video Thumbnail Bundle
 
+[![Packagist Version](https://img.shields.io/packagist/v/numero2/contao-video-thumbnail.svg?style=flat-square)](https://packagist.org/packages/numero2/contao-video-thumbnail)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](http://www.gnu.org/licenses/lgpl-3.0)
+
 Allows editors to capture a video frame as thumbnail/poster image directly in
 the Contao file manager - no ffmpeg or server-side binary required.
 

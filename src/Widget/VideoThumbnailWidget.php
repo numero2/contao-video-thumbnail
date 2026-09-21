@@ -89,7 +89,10 @@ class VideoThumbnailWidget extends Widget {
         if( !empty($this->varValue) ) {
             $posterModel = FilesModel::findByPk($this->varValue);
             if( $posterModel !== null ) {
-                $thumbnailUrl = Environment::get('base') . $posterModel->path;
+                // The poster keeps its file name when re-captured — append the
+                // content hash (updated by the DBAFS sync) as cache buster.
+                $thumbnailUrl = Environment::get('base') . $posterModel->path
+                    . '?v=' . substr((string) ($posterModel->hash ?: $posterModel->tstamp), 0, 8);
             }
         }
 

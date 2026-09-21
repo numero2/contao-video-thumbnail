@@ -11,13 +11,13 @@
     ],
     "require": {
         "php": "^8.1",
-        "contao/core-bundle": "^5.3",
+        "contao/core-bundle": "^5.3 || ^6.0",
         "doctrine/dbal": "^3.6 || ^4.0",
-        "symfony/config": "^6.4 || ^7.0",
-        "symfony/dependency-injection": "^6.4 || ^7.0",
-        "symfony/filesystem": "^6.4 || ^7.0",
-        "symfony/http-kernel": "^6.4 || ^7.0",
-        "symfony/yaml": "^6.4 || ^7.0",
+        "symfony/config": "^6.4 || ^7.0 || ^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0 || ^8.0",
+        "symfony/filesystem": "^6.4 || ^7.0 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.0 || ^8.0",
+        "symfony/yaml": "^6.4 || ^7.0 || ^8.0",
         "twig/twig": "^3.10"
     },
     "require-dev": {
