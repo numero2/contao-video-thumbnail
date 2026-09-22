@@ -10,7 +10,7 @@
     {% if figure.media.type == 'video' and figure.media.attributes.poster is not defined %}
         {% set fallback_poster = video_thumbnail_poster(source_files) %}
         {% if fallback_poster %}
-            {% set _ = figure.media.attributes.set('poster', fallback_poster) %}
+            {% do figure.media.attributes.set('poster', fallback_poster) %}
         {% endif %}
     {% endif %}
     {{ parent() }}
